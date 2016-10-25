@@ -6,7 +6,11 @@ RUN mkdir /data
 WORKDIR /data
 
 # environment for osticket
+<<<<<<< HEAD
 ENV OSTICKET_VERSION 1.10-rc.3
+=======
+ENV OSTICKET_VERSION 1.9.14
+>>>>>>> e081878dc5e068606c1b89d406f9aa765d626c3e
 ENV HOME /data
 
 # requirements
@@ -24,7 +28,10 @@ RUN apt-get update \
   php5-gd \
   php5-imap \
   php5-mysql \
+<<<<<<< HEAD
   php5-ldap \
+=======
+>>>>>>> e081878dc5e068606c1b89d406f9aa765d626c3e
   supervisor \
   unzip \
   wget && \
@@ -42,6 +49,7 @@ RUN wget -nv -O osTicket.zip https://github.com/osTicket/osTicket/releases/downl
     
 # Download languages packs
    RUN wget -nv -O upload/include/i18n/pt_BR.phar http://osticket.com/sites/default/files/download/lang/pt_BR.phar && \
+<<<<<<< HEAD
     wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar && \ 
     wget -v -O upload/include/plugins/auth-ldap.phar http://osticket.com/sites/default/files/download/plugin/auth-ldap.phar
 
@@ -50,6 +58,9 @@ RUN wget -nv -O osTicket.zip https://github.com/osTicket/osTicket/releases/downl
    #RUN wget -v -O upload/include/plugins/auth-ldap.phar http://www.osticket.com/sites/default/files/download/plugin/auth-ldap.phar
 
 
+=======
+    wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar
+>>>>>>> e081878dc5e068606c1b89d406f9aa765d626c3e
 
 # Configure nginx
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf && \

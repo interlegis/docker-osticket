@@ -20,7 +20,11 @@ $vars = array(
   'dbhost'   => getenv("MYSQL_HOST")                ?: 'mysql',
   'dbname'   => getenv("MYSQL_DATABASE")            ?: 'osticket',
   'dbuser'   => getenv("MYSQL_USER")                ?: 'osticket',
+<<<<<<< HEAD
   'dbpass'   => getenv("MYSQL_PASSWORD")            ?: 'mysecretpw',
+=======
+  'dbpass'   => getenv("MYSQL_PASSWORD")            ?: getenv("MYSQL_ENV_MYSQL_PASSWORD"),
+>>>>>>> e081878dc5e068606c1b89d406f9aa765d626c3e
 
   'smtp_host'       => getenv("SMTP_HOST")            ?: 'localhost',
   'smtp_port'       => getenv("SMTP_PORT")            ?: 25,
@@ -105,18 +109,29 @@ define('OSTICKET_CONFIGFILE','/data/upload/include/ost-config.php');
 $installer = new Installer(OSTICKET_CONFIGFILE); //Installer instance.
 
 //Determine if using linked container
+<<<<<<< HEAD
 $linked = (boolean)getenv("MYSQL_ENV_MYSQL_PORT");
+=======
+$linked = (boolean)getenv("MYSQL_PORT");
+>>>>>>> e081878dc5e068606c1b89d406f9aa765d626c3e
 
 if (!$linked) {
   echo "Using external MySQL connection\n";
 
   //Check mandatory connection settings provided
+<<<<<<< HEAD
 
   	
   if (!$vars['dbhost']) {
     err('Missing required environmental variable dbhost');
   }
   if (!$vars['dbpass']) {
+=======
+  if (!getenv("MYSQL_HOST")) {
+    err('Missing required environmental variable MYSQL_HOST');
+  }
+  if (!getenv("MYSQL_PASSWORD")) {
+>>>>>>> e081878dc5e068606c1b89d406f9aa765d626c3e
     err('Missing required environmental variable: MYSQL_PASSWORD');
   }
 } else {
