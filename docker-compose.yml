@@ -1,0 +1,20 @@
+version: '2'
+services: 
+  mysql:
+    image: mysql
+    #volumes:
+    # - "./.data/mysql:/var/lib/mysql"
+    restart: always     
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpw
+      MYSQL_DATABASE: osticket
+      MYSQL_USER: osticket
+      MYSQL_PASSWORD: mysecretpw
+ 
+  osticket:
+   build: .
+   ports:
+    - "80:80"
+   links:
+    - mysql
+
