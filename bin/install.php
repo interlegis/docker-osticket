@@ -20,7 +20,6 @@ $vars = array(
   'dbhost'   => getenv("MYSQL_HOST")                ?: 'mysql',
   'dbname'   => getenv("MYSQL_DATABASE")            ?: 'osticket',
   'dbuser'   => getenv("MYSQL_USER")                ?: 'osticket',
-  'dbpass'   => getenv("MYSQL_PASSWORD")            ?: 'mysecretpw',
   'dbpass'   => getenv("MYSQL_PASSWORD")            ?: getenv("MYSQL_ENV_MYSQL_PASSWORD"),
 
   'smtp_host'       => getenv("SMTP_HOST")            ?: 'localhost',
@@ -106,20 +105,12 @@ define('OSTICKET_CONFIGFILE','/data/upload/include/ost-config.php');
 $installer = new Installer(OSTICKET_CONFIGFILE); //Installer instance.
 
 //Determine if using linked container
-$linked = (boolean)getenv("MYSQL_ENV_MYSQL_PORT");
 $linked = (boolean)getenv("MYSQL_PORT");
-
 
 if (!$linked) {
   echo "Using external MySQL connection\n";
 
   //Check mandatory connection settings provided
-
-  	
-  if (!$vars['dbhost']) {
-    err('Missing required environmental variable dbhost');
-  }
-  if (!$vars['dbpass']) {
   if (!getenv("MYSQL_HOST")) {
     err('Missing required environmental variable MYSQL_HOST');
   }
