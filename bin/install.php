@@ -21,6 +21,7 @@ $vars = array(
   'dbname'   => getenv("MYSQL_DATABASE")            ?: 'osticket',
   'dbuser'   => getenv("MYSQL_USER")                ?: 'osticket',
   'dbpass'   => getenv("MYSQL_PASSWORD")            ?: getenv("MYSQL_ENV_MYSQL_PASSWORD"),
+  'dbport'   => getenv("MYSQL_PORT")                ?: '80',
 
   'smtp_host'       => getenv("SMTP_HOST")            ?: 'localhost',
   'smtp_port'       => getenv("SMTP_PORT")            ?: 25,
