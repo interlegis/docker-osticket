@@ -31,7 +31,7 @@ $vars = array(
   'smtp_user'       => getenv("SMTP_USER"),
   'smtp_pass'       => getenv("SMTP_PASSWORD"),
 
-  'cron_interval'   => getenv("CRON_INTERVAL")        ?: 5,
+  'cron_interval'   => getenv("CRON_INTERVAL")        ?: 2,
 
   'siri'     => getenv("INSTALL_SECRET"),
   'config'   => getenv("INSTALL_CONFIG") ?: '/data/upload/include/ost-sampleconfig.php'
