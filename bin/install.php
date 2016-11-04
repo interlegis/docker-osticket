@@ -112,12 +112,15 @@ if (!$linked) {
   echo "Using external MySQL connection\n";
 
   //Check mandatory connection settings provided
-  if (!getenv("MYSQL_HOST")) {
-    err('Missing required environmental variable MYSQL_HOST');
+if (!$vars['dbhost']) {
+    err('Missing required environmental variable dbhost');
   }
-  if (!getenv("MYSQL_PASSWORD")) {
-    err('Missing required environmental variable: MYSQL_PASSWORD');
-  }
+  if (!$vars['dbpass']) {
+    err('Missing required environmental variable dbpass');
+} else {
+  echo "Using linked MySQL container\n";
+}
+
 } else {
   echo "Using linked MySQL container\n";
 }
