@@ -1,4 +1,4 @@
-docker-osticket
+Osticket
 ===============
 
 # Introduction
@@ -23,18 +23,29 @@ The `setup/` directory has been renamed as `setup_hidden/` and the file system p
 location. It was not removed as the setup files are required as part of the automatic configuration during container
 start.
 
-# Quick Start
+# Docker compose file
 
-Ensure you have a MySQL container running that OSTicket can use to store its data.
-
-```bash
-docker run --name osticket_mysql -d -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_USER=osticket -e MYSQL_PASSWORD=secret -e MYSQL_DATABASE=osticket mysql
-```
-
-Now run this image and link the MySQL container.
+Ensure you have docker compose install in your computer before.
 
 ```bash
-docker run --name osticket -d --link osticket_mysql:mysql -p 8080:80 campbellsoftwaresolutions/osticket
+version: '2'
+services:
+  osticket:
+   image: matiasvictor/docker-osticket
+   ports:
+    - "80:80"
+   links:
+    - mysql:mysql
+
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpw
+      MYSQL_DATABASE: osticket
+      MYSQL_USER: osticket
+      MYSQL_PASSWORD: mysecretpw
+
 ```
 
 Wait for the installation to complete then browse to your OSTicket staff control panel at `http://localhost:8080/scp`. Login with default admin user & password:
