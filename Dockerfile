@@ -6,7 +6,7 @@ RUN mkdir /data
 WORKDIR /data
 
 # environment for osticket
-ENV OSTICKET_VERSION 1.10-rc.3
+ENV OSTICKET_VERSION 1.10
 ENV HOME /data
 
 # requirements
@@ -70,6 +70,5 @@ ADD supervisord.conf /data/supervisord.conf
 ADD msmtp.conf /data/msmtp.conf
 ADD bin/ /data/bin
 
-VOLUME ["/data/upload/include/plugins","/var/log/nginx"]
 EXPOSE 80
 CMD ["/data/bin/start.sh"]
