@@ -13,13 +13,13 @@ ENV HOME /data
 RUN apt-get update \
   && DEBIAN_FRONTEND=noninteractive \
   apt-get -y install --no-install-recommends \
-  memcached \
-  php5-memcached \
   ca-certificates \
   cron \
   msmtp \
   nano \
   nginx \
+  memcached \
+  php5-memcached \
   php5-cli \
   php5-curl \
   php5-fpm \
