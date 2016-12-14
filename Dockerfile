@@ -14,6 +14,7 @@ RUN apt-get update \
   && DEBIAN_FRONTEND=noninteractive \
   apt-get -y install --no-install-recommends \
   memcached \
+  php5-memcache \
   php5-memcached \
   ca-certificates \
   cron \
@@ -47,7 +48,7 @@ RUN wget -nv -O osTicket.zip https://github.com/osTicket/osTicket/releases/downl
     wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar  
    
 
-
+php5-memcache
 # Download LDAP
    RUN wget -v -O upload/include/plugins/auth-ldap.phar http://www.osticket.com/sites/default/files/download/plugin/auth-ldap.phar
 
