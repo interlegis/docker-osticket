@@ -30,6 +30,8 @@ $vars = array(
   'smtp_tls_certs'  => getenv("SMTP_TLS_CERTS")       ?: '/etc/ssl/certs/ca-certificates.crt',
   'smtp_user'       => getenv("SMTP_USER"),
   'smtp_pass'       => getenv("SMTP_PASSWORD"),
+  'memcacheserver1'    => getenv("MEMCACHE_SERVER1"),
+  'memchaceserver2'    => getenv("MEMCACHE_SERVER2"),
 
   'cron_interval'   => getenv("CRON_INTERVAL")        ?: 2,
 
@@ -188,6 +190,8 @@ $configFile= str_replace('%CONFIG-DBUSER',$vars['dbuser'],$configFile);
 $configFile= str_replace('%CONFIG-DBPASS',$vars['dbpass'],$configFile);
 $configFile= str_replace('%CONFIG-PREFIX',$vars['prefix'],$configFile);
 $configFile= str_replace('%CONFIG-SIRI',$vars['siri'],$configFile);
+$configFile= str_replace("# define('SESSION_BACKEND', 'memcache');","define('SESSION_BACKEND', 'memcache');", $configFile);
+$configFile= str_replace("# define('MEMCACHE_SERVERS', 'server1:11211,server2:11211');", "define('MEMCACHE_SERVERS', 'memcacheserver1,memcacheserver2');", $configFile);
 
 if (!file_put_contents($installer->getConfigFile(), $configFile)) {
    err("Failed to write configuration file");
