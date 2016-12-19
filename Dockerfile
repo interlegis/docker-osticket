@@ -6,7 +6,7 @@ RUN mkdir /data
 WORKDIR /data
 
 # environment for osticket
-ENV OSTICKET_VERSION 1.10-rc.3
+ENV OSTICKET_VERSION 1.10
 ENV HOME /data
 
 # requirements
@@ -18,6 +18,8 @@ RUN apt-get update \
   msmtp \
   nano \
   nginx \
+  memcached \
+  php5-memcached \
   php5-cli \
   php5-curl \
   php5-fpm \
@@ -43,8 +45,6 @@ RUN wget -nv -O osTicket.zip https://github.com/osTicket/osTicket/releases/downl
 # Download languages packs
    RUN wget -nv -O upload/include/i18n/pt_BR.phar http://osticket.com/sites/default/files/download/lang/pt_BR.phar && \
     wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar  
-   
-
 
 # Download LDAP
    RUN wget -v -O upload/include/plugins/auth-ldap.phar http://www.osticket.com/sites/default/files/download/plugin/auth-ldap.phar
@@ -70,6 +70,5 @@ ADD supervisord.conf /data/supervisord.conf
 ADD msmtp.conf /data/msmtp.conf
 ADD bin/ /data/bin
 
-VOLUME ["/data/upload/include/plugins","/var/log/nginx"]
 EXPOSE 80
 CMD ["/data/bin/start.sh"]
