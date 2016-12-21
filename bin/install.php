@@ -196,7 +196,7 @@ $usememcache = (boolean)getenv("USE_MEMCACHE");
 if ($usememcache) {
 
 $configFile= str_replace("# define('SESSION_BACKEND', 'memcache');","define('SESSION_BACKEND', 'memcache');", $configFile);
-$configFile= str_replace("# define('MEMCACHE_SERVERS', 'server1:11211,server2:11211');", "define('MEMCACHE_SERVERS', 'server1:11211');", $configFile);
+$configFile= str_replace("# define('MEMCACHE_SERVERS', 'server1:11211,server2:11211');", "define('MEMCACHE_SERVERS', 'server1:11212');", $configFile);
 }
 if (!file_put_contents($installer->getConfigFile(), $configFile)) {
    err("Failed to write configuration file");
