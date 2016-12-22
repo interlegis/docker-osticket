@@ -2,6 +2,7 @@ version: '2'
 services: 
   osticket:
     image: matiasvictor/docker-osticket
+   # build: .
     ports:
      - "80:80"
     links:
@@ -21,8 +22,8 @@ services:
       MYSQL_PASSWORD: mysecretpw
 
   memcached:
-    image: memcached
-    ports:
-     - "11212:11212"      
+    image: bitnami/memcached:latest
+    restart: always
+          
 
  
