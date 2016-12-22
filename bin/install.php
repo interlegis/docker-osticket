@@ -30,8 +30,8 @@ $vars = array(
   'smtp_tls_certs'  => getenv("SMTP_TLS_CERTS")       ?: '/etc/ssl/certs/ca-certificates.crt',
   'smtp_user'       => getenv("SMTP_USER"),
   'smtp_pass'       => getenv("SMTP_PASSWORD"),
-  'memcacheservers'    => getenv("MEMCACHE_SERVERS"),
-  
+  'memcachenameserver' => getenv("MEMCACHE_NAME")      ?: 'memcached',
+  'memcacheport'       => getenv("MEMCACHE_PORT")      ?: '11211',   
 
   'cron_interval'   => getenv("CRON_INTERVAL")        ?: 2,
 
@@ -196,7 +196,7 @@ $usememcache = (boolean)getenv("USE_MEMCACHE");
 if ($usememcache) {
 
   $configFile= str_replace("# define('SESSION_BACKEND', 'memcache');","define('SESSION_BACKEND', 'memcache');", $configFile);
-  $configFile= str_replace("# define('MEMCACHE_SERVERS', 'server1:11211,server2:11211');", "define('MEMCACHE_SERVERS'," . getenv("MEMCACHED_NAME") . ":" . getenv("MEMCACHED_PORT") . ");", $configFile);
+  $configFile= str_replace("# define('MEMCACHE_SERVERS', 'server1:11211,server2:11211');", "define('MEMCACHE_SERVERS'," .$vars['memcachenameserver']. ":" .$vars['memcacheport'].");", $configFile);
 }
 if (!file_put_contents($installer->getConfigFile(), $configFile)) {
    err("Failed to write configuration file");
