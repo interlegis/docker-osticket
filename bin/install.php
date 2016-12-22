@@ -28,7 +28,7 @@ $vars = array(
   'smtp_from'       => getenv("SMTP_FROM"),
   'smtp_tls'        => getenv("SMTP_TLS"),
   'smtp_tls_certs'  => getenv("SMTP_TLS_CERTS")       ?: '/etc/ssl/certs/ca-certificates.crt',
-  'smtp_user'       => getenv("SMTP_USER"),••••••••••
+  'smtp_user'       => getenv("SMTP_USER"),
   'smtp_pass'       => getenv("SMTP_PASSWORD"),
   'memcacheservers'    => getenv("MEMCACHE_SERVERS"),
   
