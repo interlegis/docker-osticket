@@ -9,8 +9,7 @@ services:
      - mysql:mysql   
      - memcached:memcached
     environment:
-      MEMCACHE_SERVERS: 11212
-      USE_MEMCACHE: y
+       USE_MEMCACHE: y
 
   mysql:
     image: mysql
