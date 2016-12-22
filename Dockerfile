@@ -18,7 +18,7 @@ RUN apt-get update \
   msmtp \
   nano \
   nginx \
-  php5-memcached \
+  php5-memcache \
   php5-cli \
   php5-curl \
   php5-fpm \
