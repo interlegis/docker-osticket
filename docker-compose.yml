@@ -1,8 +1,7 @@
 version: '2'
 services: 
   osticket:
-    image: matiasvictor/docker-osticket
-   # build: .
+    build: .
     ports:
      - "80:80"
     links:
