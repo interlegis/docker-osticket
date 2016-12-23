@@ -30,10 +30,11 @@ $vars = array(
   'smtp_tls_certs'  => getenv("SMTP_TLS_CERTS")       ?: '/etc/ssl/certs/ca-certificates.crt',
   'smtp_user'       => getenv("SMTP_USER"),
   'smtp_pass'       => getenv("SMTP_PASSWORD"),
+  
   'memcachenameserver' => getenv("MEMCACHE_NAME")      ?: 'memcached',
   'memcacheport'       => getenv("MEMCACHE_PORT")      ?: '11211',   
-  'trustedproxies'       => getenv("TRUSTED_PROXIES")      ?: '',
-  'localnetworks'       => getenv("LOCAL_NETWORK")      ?: '127.0.0.0/24',
+  'trustedproxies'     => getenv("TRUSTED_PROXIES")    ?: '',
+  'localnetworks'      => getenv("LOCAL_NETWORKS")     ?: '127.0.0.0/24',
 
 
   'cron_interval'   => getenv("CRON_INTERVAL")        ?: 2,
@@ -173,8 +174,7 @@ if (!$vars['siri']) {
   } else {
     echo "Generating new installation secret and saving\n";
     //Note that this randomly generated value is not intended to secure production sites!
-CAL_NETWORKS', '127.0.0.0/24');
-    $vars['siri'] substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_="), 0, 32);
+    $vars['siri'] = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890_="), 0, 32);
     file_put_contents(SECRET_FILE, $vars['siri']);
   }
 } else {
@@ -203,18 +203,9 @@ if ($usememcache) {
   $configFile= str_replace("# define('MEMCACHE_SERVERS', 'server1:11211,server2:11211');", "define('MEMCACHE_SERVERS','".$vars['memcachenameserver'].":".$vars['memcacheport']."');", $configFile);
 }
 
-if ($trustedproxies) {
-
-  $configFile= str_replace("define('TRUSTED_PROXIES', '');","define('TRUSTED_PROXIES', '".$vars['trustedproxies']."');", $configFile);
+$configFile= str_replace("define('TRUSTED_PROXIES', '');","define('TRUSTED_PROXIES', '".$vars['trustedproxies']."');", $configFile);
+$configFile= str_replace("define('LOCAL_NETWORKS', '127.0.0.0/24');","define('LOCAL_NETWORKS', '".$vars['localnetworks']."');", $configFile);
   
-}
-
-if ($localnetworks) {
-
-  $configFile= str_replace("define('LOCAL_NETWORKS', '127.0.0.0/24');","define('LOCAL_NETWORKS', '".$vars['localnetworks']."');", $configFile);
-  
-}
-
 
 if (!file_put_contents($installer->getConfigFile(), $configFile)) {
    err("Failed to write configuration file");
