@@ -1,12 +1,14 @@
 FROM debian:8
-MAINTAINER Thiago Almeida <thiagoalmeidasa@gmail.com>
+MAINTAINER Igor Santos <igorsantos@interlegis.leg.br>
+
+#atualizaçao do Dockerfile feito por Thiago Almeida <thiagoalmeidasa@gmail.com>
 
 # setup workdir
 RUN mkdir /data
 WORKDIR /data
 
 # environment for osticket
-ENV OSTICKET_VERSION 1.10
+ENV OSTICKET_VERSION 1.10.4
 ENV HOME /data
 
 # requirements
@@ -32,9 +34,9 @@ RUN apt-get update \
   rm -rf /var/lib/apt/lists/*
 
 # Download & install OSTicket
-RUN wget -nv -O osTicket.zip https://github.com/osTicket/osTicket/releases/download/v${OSTICKET_VERSION}/osTicket-v${OSTICKET_VERSION}.zip && \
-    unzip osTicket.zip && \
-    rm osTicket.zip && \
+RUN wget -nv -O osTicket-v1.10.4.zip https://github.com/osTicket/osTicket/releases/download/v1.10.4/osTicket-v1.10.4.zip && \
+    unzip osTicket-v1.10.4 && \
+    rm osTicket-v1.10.4.zip && \
     mv /data/upload/setup /data/upload/setup_hidden && \
     chown -R root:root /data/upload/setup_hidden && \
     chmod 700 /data/upload/setup_hidden && \
@@ -69,5 +71,5 @@ ADD supervisord.conf /data/supervisord.conf
 ADD msmtp.conf /data/msmtp.conf
 ADD bin/ /data/bin
 
-EXPOSE 80
+EXPOSE 85
 CMD ["/data/bin/start.sh"]
