@@ -71,5 +71,5 @@ ADD supervisord.conf /data/supervisord.conf
 ADD msmtp.conf /data/msmtp.conf
 ADD bin/ /data/bin
 
-EXPOSE 85
+EXPOSE 80
 CMD ["/data/bin/start.sh"]
