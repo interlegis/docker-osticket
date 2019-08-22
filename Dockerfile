@@ -1,14 +1,12 @@
 FROM debian:9-slim
-MAINTAINER Igor Santos <igorsantos@interlegis.leg.br>
-
-#atualizaçao do Dockerfile feito por Thiago Almeida <thiagoalmeidasa@gmail.com>
+MAINTAINER Fabio Rauber <fabiorauber@gmail.com>
 
 # setup workdir
 RUN mkdir /data
 WORKDIR /data
 
 # environment for osticket
-ENV OSTICKET_VERSION 1.11
+ENV OSTICKET_VERSION 1.12.2
 ENV HOME /data
 
 # requirements
@@ -28,6 +26,8 @@ RUN apt-get update \
   php-imap \
   php-mysql \
   php-ldap \
+  php-xml \
+  php-mbstring \
   supervisor \
   unzip \
   wget && \
@@ -61,7 +61,8 @@ RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.0/fpm/php.
     sed -i -e 's#;sendmail_path\s*=\s*#sendmail_path = "/usr/bin/msmtp -C /etc/msmtp -t "#g' /etc/php/7.0/fpm/php.ini && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.0/fpm/php-fpm.conf && \
     sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /etc/php/7.0/fpm/pool.d/www.conf && \
-    phpenmod imap
+    phpenmod imap && \
+    mkdir -p /run/php
 
 # Add nginx site
 ADD virtualhost /etc/nginx/sites-available/default

@@ -61,6 +61,6 @@ server {
          fastcgi_index  index.php;
          fastcgi_param  LARA_ENV local; # Environment variable for Laravel
          fastcgi_param  PATH_INFO	$path_info;
-         fastcgi_pass   unix:/var/run/php5-fpm.sock;
+         fastcgi_pass   unix:/run/php/php7.0-fpm.sock;
     }
 }
